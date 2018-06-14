@@ -1,6 +1,12 @@
 # Flag indicating if we've previously jumped to last directory
 typeset -g ZSH_LAST_WORKING_DIRECTORY
 
+# Ensure cache directory exists.
+if [ -z "$ZSH_CACHE_DIR" -o ! -d "$ZSH_CACHE_DIR" ]; then
+    ZSH_CACHE_DIR="$HOME/.zsh/cache"
+    mkdir -p "$ZSH_CACHE_DIR"
+fi
+
 # Updates the last directory once directory is changed
 chpwd_functions+=(chpwd_last_working_dir)
 chpwd_last_working_dir() {
